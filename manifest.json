@@ -1,0 +1,31 @@
+{
+	"name":"midchrome",
+	"manifest_version": 2,
+	"description": "Extensão do Mid para o Google Chrome",
+	"version": "1.0",
+	"permissions": [
+		"unlimited_storage",
+		"notifications",
+		"contextMenus",
+		"cookies",
+		"storage",
+		"idle",
+		"tabs",
+		"activeTab"
+	],
+	"browser_action": {
+		"default_popup": "html/popup.html"
+	},
+	"content_scripts": [
+		{ 
+			"matches": [
+				"*://*/*"
+			],
+			"js": [
+				"js/jquery-3.3.1.min.js"
+			],
+			"run_at": "document_end",
+			"persistent": false
+		}
+	]
+}
