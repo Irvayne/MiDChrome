@@ -1,9 +1,16 @@
 console.log('script popup carregado');
+var port = chrome.runtime.connect({name: "canal"});
 document.addEventListener('click', function (e) {
 	var target = e.target;
-	alert(getXpath(target));
-	
+	//alert(getXpath(target));
+	port.postMessage({info: getXpath(target)});
+
 });
+
+
+
+
+
 
 function getXpath(element){
 	
