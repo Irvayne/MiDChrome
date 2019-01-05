@@ -44,12 +44,16 @@ chrome.runtime.onConnect.addListener(function(port) {
   		var row = tabela.insertRow(-1);
   		var cell1 = row.insertCell(0);
   		var cell2 = row.insertCell(1);
+  		var cell3 = row.insertCell(2);
 
   		cell1.innerHTML = msg.info;
   		cell2.innerHTML = "<div class='form-group'><select class='form-control'><option>Input</option><option>Output</option><option>Button</option></select></div>";
+  		cell3.innerHTML = "<button type='button' class='btn btn-danger' onclick='deleteRow(this)'> <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>";
   	}
   });
 });
+
+
 
 
 function execute(){
