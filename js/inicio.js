@@ -8,8 +8,7 @@ $('#iniciar').click(function(){
 	execute();
 	$("#iniciar").hide();
 	$("#finalizar").toggle();
-	$("#tabela").toggle();
-
+	$("#input").prop('disabled', true);
 })
 
 $('#finalizar').click(function(){
@@ -19,14 +18,31 @@ $('#finalizar').click(function(){
 
 	var testTable = document.getElementById('tabela');
 
+	resposta = [];
+
 	for (i = 1; i < testTable.rows.length; i++) {
 
 		var xpath = testTable.rows[i].cells[0].innerHTML;
 		console.log(xpath);
-
+	    
 	    var tipo = testTable.rows[i].cells[1].getElementsByTagName("select")[0].value;
 	    console.log(tipo);
+
+	    resposta.push(xpaths[i-1]);
+	    resposta.push(tipo);
+
 	}
+
+	$.ajax({
+            url: 'http://localhost:8000/upload/',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log('ok');
+            },
+            data: JSON.stringify({"id_fluxo": parseInt($("#input").val()),"parametros" : resposta})
+        });
 
 })
 
@@ -38,6 +54,9 @@ chrome.runtime.onConnect.addListener(function(port) {
   console.assert(port.name == "canal");
   port.onMessage.addListener(function(msg) {
   	if(ativo == true){
+  		if(xpaths.length == 0){
+  			$("#tabela").toggle();
+  		}
   		xpaths.push(msg.info);
   		//document.getElementById("demo").innerHTML = xpaths.join(" * ");
   		var tabela = document.getElementById("tabela");
@@ -46,7 +65,7 @@ chrome.runtime.onConnect.addListener(function(port) {
   		var cell2 = row.insertCell(1);
   		var cell3 = row.insertCell(2);
 
-  		cell1.innerHTML = msg.info;
+  		cell1.innerHTML = "<h5 style='font-size: 10px;'>" + msg.info + "</h5>";
   		cell2.innerHTML = "<div class='form-group'><select class='form-control'><option>Input</option><option>Output</option><option>Button</option></select></div>";
   		cell3.innerHTML = "<button type='button' class='btn btn-danger' onclick='deleteRow(this)'> <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>";
   	}
