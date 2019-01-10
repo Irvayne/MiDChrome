@@ -2,10 +2,32 @@ var ativo = false;
 var xpaths = [];
 $("#finalizar").hide();
 $("#tabela").hide();
+$("#max").hide();
+$("#min").hide();
+
+$('#max').click(function(){
+  $("#max").hide();
+  $("#min").toggle();
+  $("#finalizar").toggle();
+  $("#tabela").toggle();
+  $("#input").toggle();
+  $("#id_fluxo").toggle();
+})
+
+
+$('#min').click(function(){
+  $("#max").toggle();
+  $("#min").hide();
+  $("#finalizar").hide();
+  $("#tabela").hide();
+  $("#input").hide();
+  $("#id_fluxo").hide();
+})
 
 $('#iniciar').click(function(){
 	ativo = true;
 	execute();
+  $("#min").toggle();
 	$("#iniciar").hide();
 	$("#finalizar").toggle();
 	$("#input").prop('disabled', true);

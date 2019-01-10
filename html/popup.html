@@ -10,13 +10,25 @@
 </head>
 <body>
 
+  <div>
+
+  <button class="btn btn-warning" id="min" style="padding-left: 0px;padding-right: 0px;padding-bottom: 0px;padding-top: 0px;border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;float: right;">
+      <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> 
+    </button>
+    <button class="btn btn-success" id="max" style="padding-left: 0px;padding-right: 0px;padding-bottom: 0px;padding-top: 0px;border-top-width: 0px;border-left-width: 0px;border-bottom-width: 0px;border-right-width: 0px;float: right;">
+      <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span> 
+    </button>
+
+  </div>
+
 	<div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">MiDChrome</h3>
   </div>
   <div class="panel-body">
+    
     <div class="form-group">
-      <label for="inputdefault">Token do fluxo</label>
+      <label id="id_fluxo" for="inputdefault">Fluxo</label>
       <input class="form-control" id="input" type="text">
     </div>
     <button class="btn btn-primary" id="iniciar">
