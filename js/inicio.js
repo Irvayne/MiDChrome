@@ -44,13 +44,17 @@ $('#finalizar').click(function(){
 
 	for (i = 1; i < testTable.rows.length; i++) {
 
-		var xpath = testTable.rows[i].cells[0].innerHTML;
+		var xpath = testTable.rows[i].cells[0].getElementsByTagName("input")[0].value;;
 		console.log(xpath);
+
+    var valor = testTable.rows[i].cells[1].getElementsByTagName("input")[0].value;
+    console.log(valor);
 	    
-	    var tipo = testTable.rows[i].cells[1].getElementsByTagName("select")[0].value;
+	    var tipo = testTable.rows[i].cells[2].getElementsByTagName("select")[0].value;
 	    console.log(tipo);
 
-	    resposta.push(xpaths[i-1]);
+	    resposta.push(xpath);
+      resposta.push(valor);
 	    resposta.push(tipo);
 
 	}
@@ -86,10 +90,12 @@ chrome.runtime.onConnect.addListener(function(port) {
   		var cell1 = row.insertCell(0);
   		var cell2 = row.insertCell(1);
   		var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
 
-  		cell1.innerHTML = "<h5 style='font-size: 10px;'>" + msg.info + "</h5>";
-  		cell2.innerHTML = "<div class='form-group'><select class='form-control'><option>Input</option><option>Output</option><option>Button</option></select></div>";
-  		cell3.innerHTML = "<button type='button' class='btn btn-danger' onclick='deleteRow(this)'> <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>";
+  		cell1.innerHTML = "<h5><input style='width: 300px;' disabled value="+msg.info+"></h5>";
+      cell2.innerHTML = "<h5><input style='width: 100px;'></h5>";
+  		cell3.innerHTML = "<div class='form-group'><select class='form-control'><option>Input</option><option>Output</option><option>Button</option><option>TabelaOutput</option><option>TabelaLink</option><option>Desativado</option><option>TabelaPaginada</option></select></div>";
+      cell4.innerHTML = "<button type='button' class='btn btn-danger' onclick='deleteRow(this)'> <span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>";
   	}
   });
 });
